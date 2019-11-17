@@ -55,7 +55,7 @@ class ft_net(nn.Module):
 
     def __init__(self, class_num ):
         super(ft_net, self).__init__()
-        model_ft = models.resnet50(pretrained=True)
+        model_ft = models.resnet101(pretrained=True)
         # avg pooling to global pooling
         model_ft.avgpool = nn.AdaptiveAvgPool2d((1,1))
         self.model = model_ft
@@ -99,7 +99,7 @@ class ft_net_middle(nn.Module):
 
     def __init__(self, class_num ):
         super(ft_net_middle, self).__init__()
-        model_ft = models.resnet50(pretrained=True)
+        model_ft = models.resnet101(pretrained=True)
         # avg pooling to global pooling
         model_ft.avgpool = nn.AdaptiveAvgPool2d((1,1))
         self.model = model_ft
@@ -129,7 +129,7 @@ class PCB(nn.Module):
         super(PCB, self).__init__()
 
         self.part = 6 # We cut the pool5 to 6 parts
-        model_ft = models.resnet50(pretrained=True)
+        model_ft = models.resnet101(pretrained=True)
         self.model = model_ft
         self.avgpool = nn.AdaptiveAvgPool2d((self.part,1))
         self.dropout = nn.Dropout(p=0.5)

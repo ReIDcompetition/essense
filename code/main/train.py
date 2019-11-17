@@ -32,10 +32,10 @@ parser.add_argument('--name',default='ft_ResNet50', type=str, help='output model
 parser.add_argument('--data_dir',default='./data',type=str, help='training dir path')
 parser.add_argument('--train_all', action='store_true', help='use all training data' )
 parser.add_argument('--color_jitter', action='store_true', help='use color jitter in training' )
-parser.add_argument('--batchsize', default=32, type=int, help='batchsize')
+parser.add_argument('--batchsize', default=128, type=int, help='batchsize')
 parser.add_argument('--erasing_p', default=0, type=float, help='Random Erasing probability, in [0,1]')
 parser.add_argument('--use_dense', action='store_true', help='use densenet121' )
-parser.add_argument('--PCB', action='store_true', help='use PCB+ResNet50' )
+parser.add_argument('--PCB', action='store_true', help='use PCB+ResNet101' )
 opt = parser.parse_args()
 
 data_dir = opt.data_dir
@@ -79,6 +79,7 @@ if opt.PCB:
     transform_train_list = [
         transforms.Resize((384,192), interpolation=3),
         transforms.RandomHorizontalFlip(),
+        transforms.ColorJitter(brightness=1.5, contrast=1.7),  # 锐化
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ]
